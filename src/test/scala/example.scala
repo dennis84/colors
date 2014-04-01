@@ -15,14 +15,15 @@ class ExampleSpec extends Specification {
                      |  println("hello \"world", "foo", "bar")
                      |}""".stripMargin
 
-      val parser = new CodeParser(input)
-      val res = parser.Code.run()
-
-      res match {
-        case Success(res)           ⇒ println(res)
-        case Failure(e: ParseError) ⇒ println(parser.formatError(e))
-        case Failure(e)             ⇒ println(e)
+      val output = Colors(input) {
+        case WordCode(v)    ⇒ s"<word>$v</word>"
+        case BracketCode(v) ⇒ s"<bracket>$v</bracket>"
+        case CommentCode(v) ⇒ s"<comment>$v</comment>"
+        case TextCode(v)    ⇒ s"<text>$v</text>"
+        case c: Code        ⇒ c.value
       }
+
+      println(output)
 
       1 must_== 1
     }
