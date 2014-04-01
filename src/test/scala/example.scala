@@ -8,7 +8,10 @@ class ExampleSpec extends Specification {
 
   "CodeParser" should {
     "parse scala code" in {
-      val input = """|class HelloWorld extends App {
+      val input = """|/** block comment
+                     | */
+                     |class HelloWorld extends App {
+                     |  // inline comment
                      |  println("hello \"world", "foo", "bar")
                      |}""".stripMargin
 

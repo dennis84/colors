@@ -9,7 +9,7 @@ class CodeParser(val input: ParserInput)
   def Code = rule { zeroOrMore(Snippets) ~ EOI }
 
   def Snippets = rule {
-    WhitespaceRule | WordRule | BracketsRule | TextRule | CharRule
+    WhitespaceRule | CommentRule | WordRule | BracketsRule | TextRule | CharRule
   }
 
   def WhitespaceRule = rule { capture(Whitespace) ~> WhitespaceCode }
@@ -17,9 +17,14 @@ class CodeParser(val input: ParserInput)
   def BracketsRule = rule { capture(Brackets) ~> BracketCode }
   def TextRule = rule { capture(Text) ~> TextCode }
   def CharRule = rule { capture(ANY) ~> CharCode }
+  def CommentRule = rule {
+    capture(InlineComment | BlockComment) ~> CommentCode
+  }
 
   def Word = rule { oneOrMore("a" - "z" | "A" - "Z" | "0" - "9") }
   def Whitespace = rule { oneOrMore(WhitespaceChar) }
+  def InlineComment = rule { "//" ~ zeroOrMore(!EOL ~ ANY) ~ EOL }
+  def BlockComment = rule { "/*" ~ zeroOrMore(!"*/" ~ ANY) ~ "*/" }
   def Text = rule {
     Quote ~ zeroOrMore(!QuoteBackslash ~ ANY | "\\" ~ ANY) ~ Quote
   }
@@ -27,5 +32,6 @@ class CodeParser(val input: ParserInput)
   val WhitespaceChar = CharPredicate(" \n\r\t\f")
   val QuoteBackslash = CharPredicate("\"\\")
   val Quote          = CharPredicate("\"'")
-  def Brackets       = CharPredicate("({[<>]})")
+  val Brackets       = CharPredicate("({[<>]})")
+  val EOL            = CharPredicate("\n\r")
 }
