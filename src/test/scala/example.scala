@@ -9,7 +9,7 @@ class ExampleSpec extends Specification {
   "CodeParser" should {
     "parse scala code" in {
       val input = """|class HelloWorld extends App {
-                     |  println("hello world", "foo")
+                     |  println("hello \"world", "foo", "bar")
                      |}""".stripMargin
 
       val parser = new CodeParser(input)
