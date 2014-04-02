@@ -6,7 +6,7 @@ import org.parboiled2._
 
 class ExampleSpec extends Specification {
 
-  "CodeParser" should {
+  "ScalaParser" should {
     "parse scala code" in {
       val input = """|/** block comment
                      | */
