@@ -2,7 +2,7 @@ package colors
 
 import org.parboiled2._
 
-class ScalaParser(val input: ParserInput) extends CodeParser with CommonRules {
+class LispParser(val input: ParserInput) extends CodeParser with CommonRules {
 
   def Snippets = rule {
     WhitespaceRule | CommentRule | WordRule | BracketsRule | TextRule | CharRule
@@ -10,11 +10,9 @@ class ScalaParser(val input: ParserInput) extends CodeParser with CommonRules {
 
   def TextRule = rule { capture(Text) ~> TextCode }
   def CommentRule = rule {
-    capture(InlineComment | BlockComment) ~> CommentCode
+    capture(";;" ~ zeroOrMore(!EOL ~ ANY) ~ EOL) ~> CommentCode
   }
 
-  def InlineComment = rule { "//" ~ zeroOrMore(!EOL ~ ANY) ~ EOL }
-  def BlockComment = rule { "/*" ~ zeroOrMore(!"*/" ~ ANY) ~ "*/" }
   def Text = rule {
     Quote ~ zeroOrMore(!QuoteBackslash ~ ANY | "\\" ~ ANY) ~ Quote
   }

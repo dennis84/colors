@@ -6,7 +6,8 @@ object Colors {
 
   lazy val parsers = Map(
     "scala"   -> ((c: String) ⇒ new ScalaParser(c)),
-    "haskell" -> ((c: String) ⇒ new HaskellParser(c)))
+    "haskell" -> ((c: String) ⇒ new HaskellParser(c)),
+    "lisp"    -> ((c: String) ⇒ new LispParser(c)))
 
   def apply(
     code: String,
