@@ -1,7 +1,6 @@
 package colors
 
 import org.specs2.mutable._
-import scala.util.{Failure, Success}
 import org.parboiled2._
 
 class ExampleSpec extends Specification {
