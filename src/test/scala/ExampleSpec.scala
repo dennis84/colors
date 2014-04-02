@@ -12,6 +12,7 @@ class ExampleSpec extends Specification {
                      |class HelloWorld extends App {
                      |  // inline comment
                      |  println("hello \"world", "foo", "bar")
+                     |  val num = 123.32
                      |}""".stripMargin
 
       val output = Colors(input, "scala") {
@@ -19,6 +20,7 @@ class ExampleSpec extends Specification {
         case BracketCode(v) ⇒ s"<bracket>$v</bracket>"
         case CommentCode(v) ⇒ s"<comment>$v</comment>"
         case TextCode(v)    ⇒ s"<text>$v</text>"
+        case NumberCode(v)  ⇒ s"<number>$v</number>"
         case c: Code        ⇒ c.value
       }
 

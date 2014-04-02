@@ -7,7 +7,8 @@ class HaskellParser(val input: ParserInput)
   with CommonRules {
 
   def Snippets = rule {
-    WhitespaceRule | CommentRule | WordRule | BracketsRule | TextRule | CharRule
+    WhitespaceRule | CommentRule | NumberRule | WordRule | BracketsRule |
+    TextRule | CharRule
   }
 
   def TextRule = rule { capture(Text) ~> TextCode }

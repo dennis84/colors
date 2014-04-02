@@ -5,7 +5,8 @@ import org.parboiled2._
 class ScalaParser(val input: ParserInput) extends CodeParser with CommonRules {
 
   def Snippets = rule {
-    WhitespaceRule | CommentRule | WordRule | BracketsRule | TextRule | CharRule
+    WhitespaceRule | CommentRule | NumberRule | WordRule | BracketsRule |
+    TextRule | CharRule
   }
 
   def TextRule = rule { capture(Text) ~> TextCode }
