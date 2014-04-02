@@ -2,7 +2,15 @@ package colors
 
 object Colors {
 
-  def apply(code: String)(f: PartialFunction[Code, String]) = for {
-    res ← new ScalaParser(code).Code.run()
+  lazy val parsers = Map(
+    "scala" -> ((c: String) ⇒ new ScalaParser(c)))
+
+  def apply(
+    code: String,
+    lang: String
+  )(f: PartialFunction[Code, String]) = for {
+    parser ← parsers.get(lang)
+  } yield for {
+    res ← parser(code).Code.run()
   } yield res.collect(f).mkString
 }
