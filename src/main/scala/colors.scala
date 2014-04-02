@@ -5,7 +5,8 @@ import scala.util.{Failure, Success}
 object Colors {
 
   lazy val parsers = Map(
-    "scala" -> ((c: String) ⇒ new ScalaParser(c)))
+    "scala"   -> ((c: String) ⇒ new ScalaParser(c)),
+    "haskell" -> ((c: String) ⇒ new HaskellParser(c)))
 
   def apply(
     code: String,
