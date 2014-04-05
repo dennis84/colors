@@ -28,5 +28,14 @@ class ExampleSpec extends Specification {
 
       1 must_== 1
     }
+
+    "parse unknown language" in {
+      val input = "console.log('test')"
+      val output = Colors(input, "javascript") {
+        case c: Code ⇒ c.value
+      }
+
+      input must_== output
+    }
   }
 }
