@@ -16,6 +16,7 @@ class ExampleSpec extends Specification {
                      |}""".stripMargin
 
       val output = Colors(input, "scala") {
+        case TitleCode(v)   ⇒ s"<title>$v</title>"
         case WordCode(v)    ⇒ s"<word>$v</word>"
         case BracketCode(v) ⇒ s"<bracket>$v</bracket>"
         case CommentCode(v) ⇒ s"<comment>$v</comment>"

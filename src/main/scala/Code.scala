@@ -14,6 +14,8 @@ case class WordCode(val value: String) extends Code
 
 case class CharCode(val value: String) extends Code
 
+case class TitleCode(val value: String) extends Code
+
 trait Code {
   val value: String
 }
